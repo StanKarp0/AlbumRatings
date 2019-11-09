@@ -1,0 +1,31 @@
+package com.stankarp0.albumratings.ui.main
+
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import com.stankarp0.albumratings.databinding.FragmentAlbumDetailsBinding
+import com.stankarp0.albumratings.R
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class AlbumDetailsFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+
+        val binding: FragmentAlbumDetailsBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_album_details, container, false)
+
+        return binding.root
+    }
+
+
+}
