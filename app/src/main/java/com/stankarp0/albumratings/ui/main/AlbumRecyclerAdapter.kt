@@ -5,41 +5,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.stankarp0.albumratings.R
-import kotlinx.android.synthetic.main.album_item_row.view.*
+import com.stankarp0.albumratings.databinding.AlbumItemRowBinding
+import com.stankarp0.albumratings.services.AlbumProperty
 
 
-class AlbumRecyclerAdapter(private val albums: ArrayList<String>)
-    : RecyclerView.Adapter<AlbumRecyclerAdapter.AlbumHolder>() {
+class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.AlbumHolder>(DiffCallback) {
 
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): AlbumHolder {
-
-        val inflatedView = LayoutInflater.from(parent.context).inflate(
-            R.layout.album_item_row, parent, false)
-
-//        val inflatedView = parent.inflate(R.layout.album_item_row, false)
-        return AlbumHolder(inflatedView)
+        Log.i("AlbumRecyclerAdapter", "onCreateViewHolder")
+        return AlbumHolder(AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context)))
     }
-
-    override fun getItemCount(): Int = albums.size
 
     override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
-        val item = albums[position]
-        holder.bindAlbum(item)
+        val item = getItem(position)
+        holder.bind(item)
+        Log.i("AlbumRecyclerAdapter", "onBindViewHolder$item")
     }
 
 
-    class AlbumHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        private var view: View = v
+    class AlbumHolder(private var binding: AlbumItemRowBinding)
+        :RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        private var view: View = binding.root
         private var description: String? = null
 
         init {
-            v.setOnClickListener(this)
+            view.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
@@ -48,12 +46,21 @@ class AlbumRecyclerAdapter(private val albums: ArrayList<String>)
             v.findNavController().navigate(action)
         }
 
-        fun bindAlbum(album: String) {
-            view.album_description.text = album
+        fun bind(albumProperty: AlbumProperty) {
+            binding.album = albumProperty
+            binding.executePendingBindings()
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<AlbumProperty>() {
+        override fun areItemsTheSame(oldItem: AlbumProperty, newItem: AlbumProperty): Boolean {
+            Log.i("AlbumRecyclerAdapter", "areItemsTheSame$oldItem:$newItem")
+            return oldItem === newItem
         }
 
-        companion object {
-            private val ALBUM_KEY = "ALBUM"
+        override fun areContentsTheSame(oldItem: AlbumProperty, newItem: AlbumProperty): Boolean {
+            Log.i("AlbumRecyclerAdapter", "areContentsTheSame$oldItem:$newItem")
+            return oldItem.albumId == newItem.albumId
         }
     }
 }

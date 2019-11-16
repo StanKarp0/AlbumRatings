@@ -1,4 +1,4 @@
-package com.stankarp0.albumratings.entity
+package com.stankarp0.albumratings.services
 
 data class AlbumProperty(
     val albumId: Int,
