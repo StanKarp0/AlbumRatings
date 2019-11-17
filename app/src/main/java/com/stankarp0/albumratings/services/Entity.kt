@@ -21,14 +21,14 @@ data class AlbumProperty(
 }
 
 data class AlbumEmbedded(
-    val albums: List<AlbumProperty>
+    val albums: List<AlbumProperty>?
 )
 
 data class AlbumObject(
     val _embedded: AlbumEmbedded
 ) {
     val albums: List<AlbumProperty>
-        get() = this._embedded.albums
+        get() = this._embedded.albums ?: listOf()
 }
 
 data class PerformerProperty(
@@ -40,7 +40,7 @@ data class PerformerProperty(
 )
 
 data class PerformerEmbedded(
-    val albums: List<PerformerProperty>
+    val albums: List<PerformerProperty>?
 )
 
 data class PerformerObject(
@@ -48,7 +48,7 @@ data class PerformerObject(
 ) {
 
     val albums: List<PerformerProperty>
-        get() = this._embedded.albums
+        get() = this._embedded.albums ?: listOf()
 
 }
 
@@ -70,12 +70,12 @@ data class RatingProperty(
 }
 
 data class RatingEmbedded(
-    val ratings: List<RatingProperty>
+    val ratings: List<RatingProperty>?
 )
 
 data class RatingObject(
     val _embedded: RatingEmbedded
 ) {
     val ratings: List<RatingProperty>
-        get() = this._embedded.ratings
+        get() = this._embedded.ratings?: listOf()
 }

@@ -1,4 +1,4 @@
-package com.stankarp0.albumratings.ui.main
+package com.stankarp0.albumratings.ui.albumdetails
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,48 +8,40 @@ import com.stankarp0.albumratings.services.*
 import kotlinx.coroutines.*
 
 
-class MainViewModel : ViewModel() {
+class AlbumDetailsViewModel : ViewModel() {
 
     // The internal MutableLiveData String that stores the most recent response
     private val _response = MutableLiveData<String>()
-    private val _albumObject = MutableLiveData<AlbumObject>()
+    private val _ratingObject = MutableLiveData<RatingObject>()
 
     // The external immutable LiveData for the response String
     val response: LiveData<String>
         get() = _response
 
-    val albumObject: LiveData<AlbumObject>
-        get() = _albumObject
+    val ratingObject: LiveData<RatingObject>
+        get() = _ratingObject
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     /**
-     * Call updateRandomAlbums() on init so we can display status immediately.
-     */
-    init {
-        Log.i("MainViewModel", "init")
-        updateRandomAlbums()
-    }
-
-    /**
      * Sets the value of the status LiveData to the Mars API status.
      */
-    // ------------- Albums ---------------
-    private fun updateRandomAlbums() {
+    fun updateAlbumRatings(album: AlbumProperty) {
         coroutineScope.launch {
-            val randomDeferred = AlbumApi.retrofitService.query("Lennon")
+            val randomDeferred = RatingApi.retrofitService.album(album.albumId)
 
             try {
                 val result = randomDeferred.await()
-                _response.value ="Success: ${result.albums.size} Albums retrieved"
-                _albumObject.value = result
+                _response.value ="Success: ${result.ratings.size} Rating retrieved"
+                _ratingObject.value = result
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
-            Log.i("MainViewModel", _response.value.toString())
+            Log.i("AlbumDetailsViewModel", _response.value.toString())
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

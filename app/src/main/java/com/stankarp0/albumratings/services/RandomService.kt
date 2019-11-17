@@ -20,10 +20,10 @@ interface RandomApiService {
     @GET("/")
     fun random(): Deferred<AlbumObject>
 
-    @GET("/year/{year}")
+    @GET("year/{year}")
     fun year(@Path("year") year: Long): Deferred<AlbumObject>
 
-    @GET("/decade/{decade}")
+    @GET("decade/{decade}")
     fun decade(@Path("decade") decade: Long): Deferred<AlbumObject>
 
 }
