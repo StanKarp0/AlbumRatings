@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="album"
-            type="com.stankarp0.albumratings.services.AlbumProperty" />
+            name="rating"
+            type="com.stankarp0.albumratings.services.RatingProperty" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_gravity="center|start"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="@{album.header}"
+            android:text="@{rating.header}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

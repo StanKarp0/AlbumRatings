@@ -1,4 +1,4 @@
-package com.stankarp0.albumratings.ui.main
+package com.stankarp0.albumratings.ui.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.databinding.AlbumItemRowBinding
 import com.stankarp0.albumratings.services.AlbumProperty
+import com.stankarp0.albumratings.ui.main.MainFragmentDirections
 
 
-class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.AlbumHolder>(DiffCallback) {
-
+class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.AlbumHolder>(
+    DiffCallback
+) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): AlbumHolder {
-        return AlbumHolder(AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context)))
+        return AlbumHolder(
+            AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context))
+        )
     }
 
     override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
@@ -39,7 +43,10 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
 
         override fun onClick(v: View) {
             binding.album?.let {
-                val action = MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(it)
+                val action =
+                    MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(
+                        it
+                    )
                 v.findNavController().navigate(action)
             }
         }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.databinding.MainFragmentBinding
+import com.stankarp0.albumratings.ui.adapters.AlbumRecyclerAdapter
 
 class MainFragment : Fragment() {
 

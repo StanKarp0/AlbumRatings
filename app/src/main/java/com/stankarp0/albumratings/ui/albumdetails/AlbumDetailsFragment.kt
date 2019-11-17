@@ -1,4 +1,4 @@
-package com.stankarp0.albumratings.ui.main
+package com.stankarp0.albumratings.ui.albumdetails
 
 
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.stankarp0.albumratings.databinding.FragmentAlbumDetailsBinding
 import com.stankarp0.albumratings.R
+import com.stankarp0.albumratings.ui.albumdetails.AlbumDetailsFragmentArgs
 
 /**
  * A simple [Fragment] subclass.
@@ -27,6 +28,5 @@ class AlbumDetailsFragment : Fragment() {
 
         return binding.root
     }
-
 
 }

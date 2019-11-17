@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/albumDetailsFragment"
-        android:name="com.stankarp0.albumratings.ui.main.AlbumDetailsFragment"
+        android:name="com.stankarp0.albumratings.ui.albumdetails.AlbumDetailsFragment"
         android:label="fragment_album_details"
         tools:layout="@layout/fragment_album_details" >
         <argument

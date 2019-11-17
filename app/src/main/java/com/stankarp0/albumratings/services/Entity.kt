@@ -14,8 +14,10 @@ data class AlbumProperty(
     val ratingsCount: Int,
     val name: String
 ): Serializable {
+
     val header: String
         get() = "${this.name} - ${this.title}(${this.year})"
+
 }
 
 data class AlbumEmbedded(
@@ -44,8 +46,10 @@ data class PerformerEmbedded(
 data class PerformerObject(
     val _embedded: PerformerEmbedded
 ) {
-    val performers: List<PerformerProperty>
+
+    val albums: List<PerformerProperty>
         get() = this._embedded.albums
+
 }
 
 data class RatingProperty(
@@ -58,7 +62,12 @@ data class RatingProperty(
     val title: String,
     val userName: String,
     val name: String
-)
+) {
+
+    val header: String
+        get() = "${this.name} - ${this.title}: ${this.rate}"
+
+}
 
 data class RatingEmbedded(
     val ratings: List<RatingProperty>
