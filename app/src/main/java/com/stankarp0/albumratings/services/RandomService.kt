@@ -5,9 +5,9 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
-private const val BASE_URL = "https://musicrating.herokuapp.com/albums"
+private const val BASE_URL = "https://musicrating.herokuapp.com/"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi_converter))
@@ -15,22 +15,20 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface AlbumApiService {
+interface RandomApiService {
 
     @GET("/")
-    fun all(): Deferred<AlbumObject>
+    fun random(): Deferred<AlbumObject>
 
-    @GET("/query")
-    fun query(@Query("query") query: String): Deferred<AlbumObject>
+    @GET("/year/{year}")
+    fun year(@Path("year") year: Long): Deferred<AlbumObject>
 
-    @GET("/performer")
-    fun performer(@Query("performerId") performer: String): Deferred<AlbumObject>
+    @GET("/decade/{decade}")
+    fun decade(@Path("decade") decade: Long): Deferred<AlbumObject>
 
 }
 
-object AlbumApi {
-
-    val retrofitService : AlbumApiService by lazy {
-        retrofit.create(AlbumApiService::class.java) }
-
+object RandomApi {
+    val retrofitService : RandomApiService by lazy {
+        retrofit.create(RandomApiService::class.java) }
 }

@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://musicrating.herokuapp.com/albums"
+private const val BASE_URL = "https://musicrating.herokuapp.com/ratings"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi_converter))
@@ -15,22 +15,21 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface AlbumApiService {
+interface RatingApiService {
 
     @GET("/")
-    fun all(): Deferred<AlbumObject>
+    fun all(): Deferred<RatingObject>
 
-    @GET("/query")
-    fun query(@Query("query") query: String): Deferred<AlbumObject>
+    @GET("/user")
+    fun user(@Query("user") user: String): Deferred<RatingObject>
 
-    @GET("/performer")
-    fun performer(@Query("performerId") performer: String): Deferred<AlbumObject>
-
+    @GET("/album")
+    fun album(@Query("albumId") albumId: Long): Deferred<RatingObject>
 }
 
-object AlbumApi {
+object RatingApi {
 
-    val retrofitService : AlbumApiService by lazy {
-        retrofit.create(AlbumApiService::class.java) }
+    val retrofitService : RatingApiService by lazy {
+        retrofit.create(RatingApiService::class.java) }
 
 }
