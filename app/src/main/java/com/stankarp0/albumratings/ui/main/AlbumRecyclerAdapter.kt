@@ -19,14 +19,12 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
         parent: ViewGroup,
         viewType: Int
     ): AlbumHolder {
-        Log.i("AlbumRecyclerAdapter", "onCreateViewHolder")
         return AlbumHolder(AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
-        Log.i("AlbumRecyclerAdapter", "onBindViewHolder$item")
     }
 
 
@@ -34,16 +32,16 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
         :RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         private var view: View = binding.root
-        private var description: String? = null
 
         init {
             view.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
-            val action = MainFragmentDirections
-                    .actionMainFragmentToAlbumDetailsFragment(description ?: "")
-            v.findNavController().navigate(action)
+            binding.album?.let {
+                val action = MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(it)
+                v.findNavController().navigate(action)
+            }
         }
 
         fun bind(albumProperty: AlbumProperty) {

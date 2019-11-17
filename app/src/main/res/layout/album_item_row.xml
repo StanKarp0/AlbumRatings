@@ -24,7 +24,7 @@
             android:layout_gravity="center|start"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="@{album.title}"
+            android:text="@{album.header}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

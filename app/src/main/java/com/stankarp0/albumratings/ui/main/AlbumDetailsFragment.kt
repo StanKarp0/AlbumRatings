@@ -19,10 +19,11 @@ class AlbumDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         val binding: FragmentAlbumDetailsBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_album_details, container, false)
+
+        val args = AlbumDetailsFragmentArgs.fromBundle(arguments!!)
+        binding.album = args.album
 
         return binding.root
     }

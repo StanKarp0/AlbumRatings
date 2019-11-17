@@ -1,5 +1,9 @@
 package com.stankarp0.albumratings.services
 
+import androidx.annotation.Keep
+import java.io.Serializable
+
+@Keep
 data class AlbumProperty(
     val albumId: Int,
     val title: String,
@@ -9,7 +13,10 @@ data class AlbumProperty(
     val average: Double,
     val ratingsCount: Int,
     val name: String
-)
+): Serializable {
+    val header: String
+        get() = "${this.name} - ${this.title}(${this.year})"
+}
 
 data class AlbumEmbedded(
     val albums: List<AlbumProperty>

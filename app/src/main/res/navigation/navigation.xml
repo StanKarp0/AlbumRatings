@@ -20,7 +20,7 @@
         android:label="fragment_album_details"
         tools:layout="@layout/fragment_album_details" >
         <argument
-            android:name="description"
-            app:argType="string" />
+            android:name="album"
+            app:argType="com.stankarp0.albumratings.services.AlbumProperty" />
     </fragment>
 </navigation>
