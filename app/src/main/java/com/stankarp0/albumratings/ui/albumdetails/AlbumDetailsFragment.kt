@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.databinding.FragmentAlbumDetailsBinding
@@ -34,8 +35,10 @@ class AlbumDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentAlbumDetailsBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_album_details, container, false)
+        val binding: FragmentAlbumDetailsBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_album_details, container, false
+        )
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -52,10 +55,20 @@ class AlbumDetailsFragment : Fragment() {
 
         // Arguments
         val args = AlbumDetailsFragmentArgs.fromBundle(arguments!!)
-        binding.album = args.album
-        Log.i("AlbumDetailsFragment", "onCreateView")
-        viewModel.updateAlbumRatings(args.album)
-        Log.i("AlbumDetailsFragment", viewModel.ratingObject.toString())
+        val album = args.album
+        binding.album = album
+
+        // Fill album list
+        viewModel.updateAlbumRatings(album)
+
+        // Actions
+        binding.performerDetailsButton.setOnClickListener {
+            val action = AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(
+                album.performerId
+            )
+            binding.root.findNavController().navigate(action)
+        }
+
         return binding.root
     }
 

@@ -22,5 +22,20 @@
         <argument
             android:name="album"
             app:argType="com.stankarp0.albumratings.services.AlbumProperty" />
+        <action
+            android:id="@+id/action_albumDetailsFragment_to_performerDetailsFragment"
+            app:destination="@id/performerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/performerDetailsFragment"
+        android:name="com.stankarp0.albumratings.ui.performerdetails.PerformerDetailsFragment"
+        android:label="fragment_performer_details"
+        tools:layout="@layout/fragment_performer_details" >
+        <action
+            android:id="@+id/action_performerDetailsFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
+        <argument
+            android:name="performerId"
+            app:argType="integer" />
     </fragment>
 </navigation>

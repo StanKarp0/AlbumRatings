@@ -1,36 +1,42 @@
-package com.stankarp0.albumratings.ui.main
+package com.stankarp0.albumratings.ui.performerdetails
 
-import androidx.lifecycle.ViewModelProviders
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import com.stankarp0.albumratings.R
-import com.stankarp0.albumratings.databinding.MainFragmentBinding
+import com.stankarp0.albumratings.databinding.FragmentPerformerDetailsBinding
 import com.stankarp0.albumratings.ui.adapters.AlbumRecyclerAdapter
 
-class MainFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ */
+class PerformerDetailsFragment : Fragment() {
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: AlbumRecyclerAdapter
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
+    private val viewModel: PerformerDetailsViewModel by lazy {
+        ViewModelProviders.of(this).get(PerformerDetailsViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-
-        val binding: MainFragmentBinding = DataBindingUtil.inflate(inflater,
-            R.layout.main_fragment, container, false)
-
+    ): View? {
+        val binding: FragmentPerformerDetailsBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_performer_details, container, false
+        )
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -42,11 +48,22 @@ class MainFragment : Fragment() {
         recyclerView = binding.recyclerView
         linearLayoutManager = LinearLayoutManager(inflater.context)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = AlbumRecyclerAdapter{a ->
-            MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(a)
+        adapter = AlbumRecyclerAdapter { a ->
+            PerformerDetailsFragmentDirections.actionPerformerDetailsFragmentToAlbumDetailsFragment(
+                a
+            )
         }
         recyclerView.adapter = adapter
 
+        // Arguments
+        val args = PerformerDetailsFragmentArgs.fromBundle(arguments!!)
+        val performerId = args.performerId
+
+        // Fill album list
+        viewModel.updateModel(performerId)
+
         return binding.root
     }
+
+
 }

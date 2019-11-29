@@ -24,7 +24,7 @@ interface AlbumApiService {
     fun query(@Query("query") query: String): Deferred<AlbumObject>
 
     @GET("performer")
-    fun performer(@Query("performerId") performer: String): Deferred<AlbumObject>
+    fun performer(@Query("performerId") performer: Int): Deferred<AlbumObject>
 
 }
 

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +14,7 @@ import com.stankarp0.albumratings.services.AlbumProperty
 import com.stankarp0.albumratings.ui.main.MainFragmentDirections
 
 
-class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.AlbumHolder>(
+class AlbumRecyclerAdapter(private val actionGetter: (AlbumProperty) -> NavDirections): ListAdapter<AlbumProperty, AlbumRecyclerAdapter.AlbumHolder>(
     DiffCallback
 ) {
 
@@ -22,6 +23,7 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
         viewType: Int
     ): AlbumHolder {
         return AlbumHolder(
+            actionGetter,
             AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
@@ -32,7 +34,7 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
     }
 
 
-    class AlbumHolder(private var binding: AlbumItemRowBinding)
+    class AlbumHolder(private val act: (AlbumProperty) -> NavDirections, private var binding: AlbumItemRowBinding)
         :RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         private var view: View = binding.root
@@ -43,11 +45,7 @@ class AlbumRecyclerAdapter: ListAdapter<AlbumProperty, AlbumRecyclerAdapter.Albu
 
         override fun onClick(v: View) {
             binding.album?.let {
-                val action =
-                    MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(
-                        it
-                    )
-                v.findNavController().navigate(action)
+                v.findNavController().navigate(act(it))
             }
         }
 
