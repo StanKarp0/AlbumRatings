@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         val navController = this.findNavController(R.id.nav_host_fragment)
 
+//        val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+
         NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
 //        setContentView(R.layout.main_activity)
 //        if (savedInstanceState == null) {
@@ -31,6 +33,11 @@ class MainActivity : AppCompatActivity() {
 //                .replace(R.id.container, MainFragment.newInstance())
 //                .commitNow()
 //        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return NavigationUI.navigateUp(navController, drawerLayout)
     }
 
 }

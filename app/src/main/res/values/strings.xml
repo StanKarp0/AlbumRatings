@@ -6,4 +6,5 @@
     <string name="album_details_search_button">Search</string>
     <string name="album_details_rate_button">Rate</string>
     <string name="performer_details_search_button">Search</string>
+    <string name="random_albums">Random Albums</string>
 </resources>
