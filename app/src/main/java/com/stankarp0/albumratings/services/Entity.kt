@@ -40,15 +40,15 @@ data class PerformerProperty(
 )
 
 data class PerformerEmbedded(
-    val albums: List<PerformerProperty>?
+    val performers: List<PerformerProperty>?
 )
 
 data class PerformerObject(
     val _embedded: PerformerEmbedded
 ) {
 
-    val albums: List<PerformerProperty>
-        get() = this._embedded.albums ?: listOf()
+    val performers: List<PerformerProperty>
+        get() = this._embedded.performers ?: listOf()
 
 }
 

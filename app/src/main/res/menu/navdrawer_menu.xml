@@ -4,4 +4,7 @@
     <item
         android:id="@+id/mainFragment"
         android:title="@string/random_albums" />
+    <item
+        android:id="@+id/performerListFragment"
+        android:title="@string/menu_performers_list" />
 </menu>
