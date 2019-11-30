@@ -37,9 +37,6 @@
         <argument
             android:name="performerId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_performerDetailsFragment_to_performerListFragment"
-            app:destination="@id/performerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/performerListFragment"
@@ -49,5 +46,14 @@
         <action
             android:id="@+id/action_performerListFragment_to_performerDetailsFragment"
             app:destination="@id/performerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumListFragment"
+        android:name="com.stankarp0.albumratings.ui.albumlist.AlbumListFragment"
+        android:label="fragment_album_list"
+        tools:layout="@layout/fragment_album_list" >
+        <action
+            android:id="@+id/action_albumListFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
     </fragment>
 </navigation>

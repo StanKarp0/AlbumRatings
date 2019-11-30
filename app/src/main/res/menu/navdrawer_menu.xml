@@ -7,4 +7,7 @@
     <item
         android:id="@+id/performerListFragment"
         android:title="@string/menu_performers_list" />
+    <item
+        android:id="@+id/albumListFragment"
+        android:title="@string/menu_albums_list" />
 </menu>

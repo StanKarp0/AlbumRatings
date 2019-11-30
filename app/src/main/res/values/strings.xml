@@ -8,4 +8,5 @@
     <string name="performer_details_search_button">Search</string>
     <string name="random_albums">Random Albums</string>
     <string name="menu_performers_list">Performers</string>
+    <string name="menu_albums_list">Albums</string>
 </resources>
