@@ -6,7 +6,8 @@
     <string name="album_details_search_button">Search</string>
     <string name="album_details_rate_button">Rate</string>
     <string name="performer_details_search_button">Search</string>
-    <string name="random_albums">Random Albums</string>
+    <string name="random_albums">Random</string>
     <string name="menu_performers_list">Performers</string>
     <string name="menu_albums_list">Albums</string>
+    <string name="menu_ratings_list">Ratings</string>
 </resources>

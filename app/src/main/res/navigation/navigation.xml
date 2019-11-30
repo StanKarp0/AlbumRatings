@@ -55,5 +55,20 @@
         <action
             android:id="@+id/action_albumListFragment_to_albumDetailsFragment"
             app:destination="@id/albumDetailsFragment" />
+        <action
+            android:id="@+id/action_albumListFragment_to_performerDetailsFragment"
+            app:destination="@id/performerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ratingListFragment"
+        android:name="com.stankarp0.albumratings.ui.ratinglist.RatingListFragment"
+        android:label="fragment_rating_list"
+        tools:layout="@layout/fragment_rating_list" >
+        <action
+            android:id="@+id/action_ratingListFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
+        <action
+            android:id="@+id/action_ratingListFragment_to_performerDetailsFragment"
+            app:destination="@id/performerDetailsFragment" />
     </fragment>
 </navigation>

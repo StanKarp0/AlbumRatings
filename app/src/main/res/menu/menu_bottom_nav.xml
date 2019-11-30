@@ -3,12 +3,19 @@
 
     <item
         android:id="@+id/mainFragment"
-        android:title="@string/random_albums" />
+        android:title="@string/random_albums"
+        android:textSize="8sp"/>
     <item
         android:id="@+id/performerListFragment"
-        android:title="@string/menu_performers_list" />
+        android:title="@string/menu_performers_list"
+        android:textSize="8sp"/>
     <item
         android:id="@+id/albumListFragment"
-        android:title="@string/menu_albums_list" />
+        android:title="@string/menu_albums_list"
+        android:textSize="8sp"/>
+    <item
+        android:id="@+id/ratingListFragment"
+        android:title="@string/menu_ratings_list"
+        android:textSize="8sp"/>
 
 </menu>

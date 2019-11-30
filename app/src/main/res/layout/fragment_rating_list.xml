@@ -4,12 +4,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.albumlist.AlbumListFragment">
+    tools:context=".ui.ratinglist.RatingListFragment">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.stankarp0.albumratings.ui.albumlist.AlbumListViewModel"/>
+            type="com.stankarp0.albumratings.ui.ratinglist.RatingListViewModel" />
     </data>
 
     <FrameLayout
@@ -19,12 +20,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="6dp"
+            android:layout_height="wrap_content"
             android:clipToPadding="false"
-            app:listData="@{viewModel.albumObject}"
-            app:spanCount="2"/>
+            android:padding="6dp"
+            app:listData="@{viewModel.ratingObject}"
+            app:spanCount="2" />
 
     </FrameLayout>
-
 </layout>
