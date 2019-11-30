@@ -33,8 +33,6 @@ class AlbumListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_album_list, container, false)
-
         val binding: FragmentAlbumListBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_album_list, container, false

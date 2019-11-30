@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
         navController = this.findNavController(R.id.nav_host_fragment)
         binding.navView.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

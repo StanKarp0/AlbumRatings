@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:title="@string/random_albums" />
+    <item
+        android:id="@+id/performerListFragment"
+        android:title="@string/menu_performers_list" />
+    <item
+        android:id="@+id/albumListFragment"
+        android:title="@string/menu_albums_list" />
+
+</menu>
