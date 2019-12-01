@@ -4,14 +4,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.databinding.RatingItemRowBinding
 import com.stankarp0.albumratings.services.RatingProperty
+import kotlinx.android.synthetic.main.fragment_rating.view.*
 
 
-class RatingRecyclerAdapter : ListAdapter<RatingProperty, RatingRecyclerAdapter.RatingHolder>(
+class RatingRecyclerAdapter(
+    private val rating_details: (RatingProperty) -> NavDirections
+) : ListAdapter<RatingProperty, RatingRecyclerAdapter.RatingHolder>(
     DiffCallback
 ) {
 
@@ -21,6 +26,7 @@ class RatingRecyclerAdapter : ListAdapter<RatingProperty, RatingRecyclerAdapter.
         viewType: Int
     ): RatingHolder {
         return RatingHolder(
+            rating_details,
             RatingItemRowBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
@@ -31,22 +37,20 @@ class RatingRecyclerAdapter : ListAdapter<RatingProperty, RatingRecyclerAdapter.
     }
 
 
-    class RatingHolder(private var binding: RatingItemRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class RatingHolder(
+        rating_details: (RatingProperty) -> NavDirections,
+        private var binding: RatingItemRowBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         private var view: View = binding.root
 
-//        init {
-//            view.setOnClickListener(this)
-//        }
-
-//        override fun onClick(v: View) {
-//            binding.rating?.let {
-//                val action =
-//                    MainFragmentDirections.actionMainFragmentToAlbumDetailsFragment(it)
-//                v.findNavController().navigate(action)
-//            }
-//        }
+        init {
+            binding.detailsButton.setOnClickListener {
+                binding.rating?.let {
+                    view.findNavController().navigate(rating_details(it))
+                }
+            }
+        }
 
         fun bind(ratingProperty: RatingProperty) {
             binding.rating = ratingProperty

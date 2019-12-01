@@ -12,7 +12,8 @@ import com.stankarp0.albumratings.databinding.PerformerItemRowBinding
 import com.stankarp0.albumratings.services.PerformerProperty
 
 
-class PerformerRecyclerAdapter(private val on_click: (PerformerProperty) -> NavDirections) :
+class PerformerRecyclerAdapter(
+    private val on_click: (PerformerProperty) -> NavDirections) :
     ListAdapter<PerformerProperty, PerformerRecyclerAdapter.PerformerHolder>(
         DiffCallback
     ) {

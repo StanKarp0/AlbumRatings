@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_albumDetailsFragment_to_performerDetailsFragment"
             app:destination="@id/performerDetailsFragment" />
+        <action
+            android:id="@+id/action_albumDetailsFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
     </fragment>
     <fragment
         android:id="@+id/performerDetailsFragment"
@@ -70,5 +73,23 @@
         <action
             android:id="@+id/action_ratingListFragment_to_performerDetailsFragment"
             app:destination="@id/performerDetailsFragment" />
+        <action
+            android:id="@+id/action_ratingListFragment_to_ratingFragment"
+            app:destination="@id/ratingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.stankarp0.albumratings.ui.ratingdetails.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" >
+        <action
+            android:id="@+id/action_ratingFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
+        <action
+            android:id="@+id/action_ratingFragment_to_performerDetailsFragment"
+            app:destination="@id/performerDetailsFragment" />
+        <argument
+            android:name="rating"
+            app:argType="com.stankarp0.albumratings.services.RatingProperty" />
     </fragment>
 </navigation>

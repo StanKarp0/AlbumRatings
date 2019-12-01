@@ -10,4 +10,6 @@
     <string name="menu_performers_list">Performers</string>
     <string name="menu_albums_list">Albums</string>
     <string name="menu_ratings_list">Ratings</string>
+    <string name="rating_details_edit_button">Edit</string>
+    <string name="rating_item_row_details">Details</string>
 </resources>

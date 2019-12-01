@@ -50,7 +50,9 @@ class AlbumDetailsFragment : Fragment() {
         recyclerView = binding.recyclerView
         linearLayoutManager = LinearLayoutManager(inflater.context)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = RatingRecyclerAdapter()
+        adapter = RatingRecyclerAdapter { rating ->
+            AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToRatingFragment(rating)
+        }
         recyclerView.adapter = adapter
 
         // Arguments
@@ -63,9 +65,10 @@ class AlbumDetailsFragment : Fragment() {
 
         // Actions
         binding.performerDetailsButton.setOnClickListener {
-            val action = AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(
-                album.performerId
-            )
+            val action =
+                AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(
+                    album.performerId
+                )
             binding.root.findNavController().navigate(action)
         }
 

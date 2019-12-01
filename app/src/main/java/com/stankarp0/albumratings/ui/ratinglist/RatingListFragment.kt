@@ -53,7 +53,9 @@ class RatingListFragment : Fragment() {
         recyclerView = binding.recyclerView
         linearLayoutManager = LinearLayoutManager(inflater.context)
         recyclerView.layoutManager = linearLayoutManager
-        adapter = RatingRecyclerAdapter()
+        adapter = RatingRecyclerAdapter{ rating ->
+            RatingListFragmentDirections.actionRatingListFragmentToRatingFragment(rating)
+        }
         recyclerView.adapter = adapter
 
         return binding.root

@@ -52,6 +52,7 @@ data class PerformerObject(
 
 }
 
+@Keep
 data class RatingProperty(
     val ratingId: Int,
     val date: String,
@@ -62,7 +63,7 @@ data class RatingProperty(
     val title: String,
     val userName: String,
     val name: String
-) {
+): Serializable {
 
     val header: String
         get() = "${this.name} - ${this.title}: ${this.rate}"
