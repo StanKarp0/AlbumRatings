@@ -27,7 +27,7 @@ class RatingRecyclerAdapter(
     ): RatingHolder {
         return RatingHolder(
             rating_details,
-            RatingItemRowBinding.inflate(LayoutInflater.from(parent.context))
+            RatingItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

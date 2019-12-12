@@ -24,7 +24,7 @@ class AlbumRecyclerAdapter(private val actionGetter: (AlbumProperty) -> NavDirec
     ): AlbumHolder {
         return AlbumHolder(
             actionGetter,
-            AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context))
+            AlbumItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

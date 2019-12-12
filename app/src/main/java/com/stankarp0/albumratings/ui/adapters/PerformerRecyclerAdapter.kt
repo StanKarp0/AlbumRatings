@@ -25,7 +25,7 @@ class PerformerRecyclerAdapter(
     ): PerformerHolder {
         return PerformerHolder(
             on_click,
-            PerformerItemRowBinding.inflate(LayoutInflater.from(parent.context))
+            PerformerItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
