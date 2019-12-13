@@ -50,7 +50,7 @@ class PerformerListFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
         adapter = PerformerRecyclerAdapter { p ->
             PerformerListFragmentDirections.actionPerformerListFragmentToPerformerDetailsFragment(
-                p.performerId
+                p
             )
         }
         recyclerView.adapter = adapter

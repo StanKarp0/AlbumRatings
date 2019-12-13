@@ -31,13 +31,14 @@ data class AlbumObject(
         get() = this._embedded.albums ?: listOf()
 }
 
+@Keep
 data class PerformerProperty(
     val performerId: Int,
     val name: String,
     val average: Double,
     val ratingsCount: Int,
     val albumCount: Int
-)
+): Serializable
 
 data class PerformerEmbedded(
     val performers: List<PerformerProperty>?

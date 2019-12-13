@@ -17,6 +17,10 @@ class AlbumDetailsViewModel : ViewModel() {
     val ratingObject: LiveData<RatingObject>
         get() = _ratingObject
 
+    private val _performer = MutableLiveData<PerformerProperty>()
+    val performer: LiveData<PerformerProperty>
+        get() = _performer
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -31,6 +35,19 @@ class AlbumDetailsViewModel : ViewModel() {
             }
         }
     }
+
+    fun findPerformer(album: AlbumProperty) {
+        coroutineScope.launch {
+            val performerDeferred = PerformerApi.retrofitService.performer(album.performerId)
+            try {
+                val result = performerDeferred.await()
+                _performer.value = result
+            } catch (e: Exception) {
+                Log.e("AlbumDetailsViewModel","Failure: ${e.message}")
+            }
+        }
+    }
+
 
     override fun onCleared() {
         super.onCleared()

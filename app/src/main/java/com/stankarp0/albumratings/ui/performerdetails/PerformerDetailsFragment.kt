@@ -57,10 +57,10 @@ class PerformerDetailsFragment : Fragment() {
 
         // Arguments
         val args = PerformerDetailsFragmentArgs.fromBundle(arguments!!)
-        val performerId = args.performerId
+        val performer = args.performer
 
         // Fill album list
-        viewModel.updateModel(performerId)
+        viewModel.updateModel(performer)
 
         return binding.root
     }

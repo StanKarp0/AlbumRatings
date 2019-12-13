@@ -7,17 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.databinding.FragmentRatingBinding
-import com.stankarp0.albumratings.ui.albumdetails.AlbumDetailsViewModel
 
 /**
  * A simple [Fragment] subclass.
  */
 class RatingFragment : Fragment() {
+
+    private val viewModel: RatingDetailsViewModel by lazy {
+        ViewModelProviders.of(this).get(RatingDetailsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,21 +41,13 @@ class RatingFragment : Fragment() {
 
         // Actions
         binding.performerDetailsButton.setOnClickListener {
-            val action =
-                RatingFragmentDirections.actionRatingFragmentToPerformerDetailsFragment(
-                    args.rating.performerId
-                )
-            binding.root.findNavController().navigate(action)
+            viewModel.findPerformer(args.rating)
         }
 
-
-//        binding.albumDetailsButton.setOnClickListener {
-//            val action =
-//                RatingFragmentDirections.actionRatingFragmentToPerformerDetailsFragment(
-//                    args.rating.performerId
-//                )
-//            binding.root.findNavController().navigate(action)
-//        }
+        viewModel.performer.observe(this, Observer {
+            val action = RatingFragmentDirections.actionRatingFragmentToPerformerDetailsFragment(it)
+            binding.root.findNavController().navigate(action)
+        })
 
         // Inflate the layout for this fragment
         return binding.root

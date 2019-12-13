@@ -29,21 +29,9 @@ class PerformerDetailsViewModel : ViewModel() {
 
 
     // ------------- Albums ---------------
-    fun updateModel(performerId: Int) {
-        updatePerformer(performerId)
-        updateAlbums(performerId)
-    }
-
-    private fun updatePerformer(performerId: Int) {
-        coroutineScope.launch {
-            val randomDeferred = PerformerApi.retrofitService.performer(performerId)
-            try {
-                val result = randomDeferred.await()
-                _performer.value = result
-            } catch (e: Exception) {
-                Log.e("PerformerDetailsViewMod", "Failure: ${e.message}")
-            }
-        }
+    fun updateModel(performer: PerformerProperty) {
+        _performer.value = performer
+        updateAlbums(performer.performerId)
     }
 
     private fun updateAlbums(performerId: Int) {

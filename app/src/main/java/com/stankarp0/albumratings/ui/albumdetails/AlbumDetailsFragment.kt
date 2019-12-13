@@ -2,12 +2,12 @@ package com.stankarp0.albumratings.ui.albumdetails
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.databinding.FragmentAlbumDetailsBinding
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.ui.adapters.RatingRecyclerAdapter
-import com.stankarp0.albumratings.ui.albumdetails.AlbumDetailsFragmentArgs
-import com.stankarp0.albumratings.ui.main.MainViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -65,12 +63,13 @@ class AlbumDetailsFragment : Fragment() {
 
         // Actions
         binding.performerDetailsButton.setOnClickListener {
-            val action =
-                AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(
-                    album.performerId
-                )
-            binding.root.findNavController().navigate(action)
+            viewModel.findPerformer(album)
         }
+
+        viewModel.performer.observe(this, Observer {
+            val action = AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(it)
+            binding.root.findNavController().navigate(action)
+        })
 
         return binding.root
     }

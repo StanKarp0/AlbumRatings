@@ -38,8 +38,8 @@
             android:id="@+id/action_performerDetailsFragment_to_albumDetailsFragment"
             app:destination="@id/albumDetailsFragment" />
         <argument
-            android:name="performerId"
-            app:argType="integer" />
+            android:name="performer"
+            app:argType="com.stankarp0.albumratings.services.PerformerProperty" />
     </fragment>
     <fragment
         android:id="@+id/performerListFragment"
