@@ -5,6 +5,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://musicrating.herokuapp.com/albums/"
@@ -22,6 +23,9 @@ interface AlbumApiService {
 
     @GET("query")
     fun query(@Query("query") query: String): Deferred<AlbumObject>
+
+    @GET("{albumId}")
+    fun album(@Path("albumId") albumId: Int): Deferred<AlbumProperty>
 
     @GET("performer")
     fun performer(@Query("performerId") performer: Int): Deferred<AlbumObject>

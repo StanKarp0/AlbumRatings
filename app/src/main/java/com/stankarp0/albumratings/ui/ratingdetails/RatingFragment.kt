@@ -49,6 +49,15 @@ class RatingFragment : Fragment() {
             binding.root.findNavController().navigate(action)
         })
 
+        binding.albumDetailsButton.setOnClickListener {
+            viewModel.findAlbum(args.rating)
+        }
+
+        viewModel.album.observe(this, Observer {
+            val action = RatingFragmentDirections.actionRatingFragmentToAlbumDetailsFragment(it)
+            binding.root.findNavController().navigate(action)
+        })
+
         // Inflate the layout for this fragment
         return binding.root
     }

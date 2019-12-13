@@ -17,4 +17,6 @@
     <string name="performer_details_ratings">Ratings: %d</string>
     <string name="performer_details_albums">Albums: %d</string>
     <string name="performer_details_average">Average: %.2f</string>
+    <string name="rating_details_username">Username: %s</string>
+    <string name="rating_description">Rating:\n %s</string>
 </resources>

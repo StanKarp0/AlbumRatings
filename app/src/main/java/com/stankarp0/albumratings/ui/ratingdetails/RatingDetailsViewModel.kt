@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.stankarp0.albumratings.services.AlbumProperty
-import com.stankarp0.albumratings.services.PerformerApi
-import com.stankarp0.albumratings.services.PerformerProperty
-import com.stankarp0.albumratings.services.RatingProperty
+import com.stankarp0.albumratings.services.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,6 +17,10 @@ class RatingDetailsViewModel : ViewModel() {
     val performer: LiveData<PerformerProperty>
         get() = _performer
 
+    private val _album = MutableLiveData<AlbumProperty>()
+    val album: LiveData<AlbumProperty>
+        get() = _album
+
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -30,6 +31,18 @@ class RatingDetailsViewModel : ViewModel() {
             try {
                 val result = performerDeferred.await()
                 _performer.value = result
+            } catch (e: Exception) {
+                Log.e("RatingDetailsViewModel","Failure: ${e.message}")
+            }
+        }
+    }
+
+    fun findAlbum(rating: RatingProperty) {
+        coroutineScope.launch {
+            val performerDeferred = AlbumApi.retrofitService.album(rating.albumId)
+            try {
+                val result = performerDeferred.await()
+                _album.value = result
             } catch (e: Exception) {
                 Log.e("RatingDetailsViewModel","Failure: ${e.message}")
             }
