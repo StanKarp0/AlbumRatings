@@ -13,5 +13,8 @@
     <string name="rating_details_edit_button">Edit</string>
     <string name="rating_item_row_details">Details</string>
     <string name="album_cover_description">Album cover</string>
-    <string name="rating_row_rate">Rate: %.1f</string>
+    <string name="rating_row_rate">Rate: %.2f</string>
+    <string name="performer_details_ratings">Ratings: %d</string>
+    <string name="performer_details_albums">Albums: %d</string>
+    <string name="performer_details_average">Average: %.2f</string>
 </resources>
