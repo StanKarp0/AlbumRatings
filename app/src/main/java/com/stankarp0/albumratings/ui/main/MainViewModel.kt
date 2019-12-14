@@ -27,7 +27,7 @@ class MainViewModel : ViewModel() {
     // ------------- Albums ---------------
     private fun updateRandomAlbums() {
         coroutineScope.launch {
-            val randomDeferred = AlbumApi.retrofitService.query("Lennon")
+            val randomDeferred = RandomApi.retrofitService.albumsQuery("Lennon")
 
             try {
                 val result = randomDeferred.await()

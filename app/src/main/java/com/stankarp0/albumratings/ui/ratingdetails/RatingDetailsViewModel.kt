@@ -27,7 +27,7 @@ class RatingDetailsViewModel : ViewModel() {
 
     fun findPerformer(rating: RatingProperty) {
         coroutineScope.launch {
-            val performerDeferred = PerformerApi.retrofitService.performer(rating.performerId)
+            val performerDeferred = RandomApi.retrofitService.performer(rating.performerId)
             try {
                 val result = performerDeferred.await()
                 _performer.value = result
@@ -39,7 +39,7 @@ class RatingDetailsViewModel : ViewModel() {
 
     fun findAlbum(rating: RatingProperty) {
         coroutineScope.launch {
-            val performerDeferred = AlbumApi.retrofitService.album(rating.albumId)
+            val performerDeferred = RandomApi.retrofitService.album(rating.albumId)
             try {
                 val result = performerDeferred.await()
                 _album.value = result

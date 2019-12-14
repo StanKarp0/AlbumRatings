@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.stankarp0.albumratings.services.RatingApi
+import com.stankarp0.albumratings.services.RandomApi
 import com.stankarp0.albumratings.services.RatingObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,7 @@ class RatingListViewModel : ViewModel() {
 
     private fun updateRatings() {
         coroutineScope.launch {
-            val randomDeferred = RatingApi.retrofitService.all()
+            val randomDeferred = RandomApi.retrofitService.allRatings()
             try {
                 val result = randomDeferred.await()
                 _ratingObject.value = result

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.stankarp0.albumratings.services.AlbumApi
 import com.stankarp0.albumratings.services.AlbumObject
+import com.stankarp0.albumratings.services.RandomApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,7 +28,7 @@ class AlbumListViewModel : ViewModel() {
     // ------------- Albums ---------------
     private fun updateAlbums() {
         coroutineScope.launch {
-            val randomDeferred = AlbumApi.retrofitService.all()
+            val randomDeferred = RandomApi.retrofitService.allAlbums()
             try {
                 val result = randomDeferred.await()
                 _albumObject.value = result

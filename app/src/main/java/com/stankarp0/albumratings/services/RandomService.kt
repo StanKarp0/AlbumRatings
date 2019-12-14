@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://musicrating.herokuapp.com/"
 
@@ -18,13 +19,43 @@ private val retrofit = Retrofit.Builder()
 interface RandomApiService {
 
     @GET("/")
-    fun random(): Deferred<AlbumObject>
+    fun randomAlbum(): Deferred<AlbumObject>
 
     @GET("year/{year}")
-    fun year(@Path("year") year: Long): Deferred<AlbumObject>
+    fun randomFromYear(@Path("year") year: Long): Deferred<AlbumObject>
 
     @GET("decade/{decade}")
-    fun decade(@Path("decade") decade: Long): Deferred<AlbumObject>
+    fun randomFromDecade(@Path("decade") decade: Long): Deferred<AlbumObject>
+
+    @GET("performers")
+    fun allPerformers(): Deferred<PerformerObject>
+
+    @GET("performers/{performerId}")
+    fun performer(@Path("performerId") performerId: Int): Deferred<PerformerProperty>
+
+    @GET("performers/query")
+    fun performersQuery(@Query("query") query: String): Deferred<PerformerObject>
+
+    @GET("albums")
+    fun allAlbums(): Deferred<AlbumObject>
+
+    @GET("albums/query")
+    fun albumsQuery(@Query("query") query: String): Deferred<AlbumObject>
+
+    @GET("albums/{albumId}")
+    fun album(@Path("albumId") albumId: Int): Deferred<AlbumProperty>
+
+    @GET("albums/performer")
+    fun performerAlbums(@Query("performerId") performer: Int): Deferred<AlbumObject>
+
+    @GET("ratings")
+    fun allRatings(): Deferred<RatingObject>
+
+    @GET("ratings/user")
+    fun userRatings(@Query("user") user: String): Deferred<RatingObject>
+
+    @GET("ratings/album")
+    fun albumRatings(@Query("albumId") albumId: Int): Deferred<RatingObject>
 
 }
 
