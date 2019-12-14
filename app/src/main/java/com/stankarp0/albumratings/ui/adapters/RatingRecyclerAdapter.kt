@@ -58,12 +58,10 @@ class RatingRecyclerAdapter(
 
     companion object DiffCallback : DiffUtil.ItemCallback<RatingProperty>() {
         override fun areItemsTheSame(oldItem: RatingProperty, newItem: RatingProperty): Boolean {
-            Log.i("AlbumRecyclerAdapter", "areItemsTheSame$oldItem:$newItem")
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: RatingProperty, newItem: RatingProperty): Boolean {
-            Log.i("AlbumRecyclerAdapter", "areContentsTheSame$oldItem:$newItem")
             return oldItem.albumId == newItem.albumId
         }
     }

@@ -13,9 +13,9 @@
         android:id="@+id/albumListFragment"
         android:title="@string/menu_albums_list"
         android:textSize="8sp"/>
-    <item
-        android:id="@+id/ratingListFragment"
-        android:title="@string/menu_ratings_list"
-        android:textSize="8sp"/>
+<!--    <item-->
+<!--        android:id="@+id/ratingListFragment"-->
+<!--        android:title="@string/menu_ratings_list"-->
+<!--        android:textSize="8sp"/>-->
 
 </menu>

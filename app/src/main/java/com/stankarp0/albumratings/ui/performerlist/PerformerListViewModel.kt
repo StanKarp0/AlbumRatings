@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.stankarp0.albumratings.services.PerformerObject
-import com.stankarp0.albumratings.services.RandomApi
+import com.stankarp0.albumratings.services.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,19 +21,27 @@ class PerformerListViewModel : ViewModel() {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var page = 0
+    private var query = ""
 
     init {
         updatePerformers()
     }
 
     // ------------- Albums ---------------
-    private fun updatePerformers() {
+    fun updatePerformers() {
         coroutineScope.launch {
+            val randomDeferred = RandomApi.retrofitService.performersQuery(query, page)
+            page += 1
 
-            val randomDeferred = RandomApi.retrofitService.allPerformers()
             try {
                 val result = randomDeferred.await()
-                _performerObject.value = result
+                if (_performerObject.value == null) {
+                    _performerObject.value = result
+                } else if (result.performers.isNotEmpty()){
+                    val performers = (_performerObject.value?.performers ?: listOf()) + result.performers
+                    _performerObject.value = PerformerObject(PerformerEmbedded(performers))
+                }
             } catch (e: Exception) {
                 Log.e("PerformerListViewModel", "Failure: ${e.message}")
             }
@@ -46,5 +53,11 @@ class PerformerListViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
+    fun setQuery(text: String) {
+        page = 0
+        query = text
+        _performerObject.value = null
+        updatePerformers()
+    }
 
 }

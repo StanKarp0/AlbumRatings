@@ -57,12 +57,10 @@ class AlbumRecyclerAdapter(private val actionGetter: (AlbumProperty) -> NavDirec
 
     companion object DiffCallback : DiffUtil.ItemCallback<AlbumProperty>() {
         override fun areItemsTheSame(oldItem: AlbumProperty, newItem: AlbumProperty): Boolean {
-            Log.i("AlbumRecyclerAdapter", "areItemsTheSame$oldItem:$newItem")
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: AlbumProperty, newItem: AlbumProperty): Boolean {
-            Log.i("AlbumRecyclerAdapter", "areContentsTheSame$oldItem:$newItem")
             return oldItem.albumId == newItem.albumId
         }
     }

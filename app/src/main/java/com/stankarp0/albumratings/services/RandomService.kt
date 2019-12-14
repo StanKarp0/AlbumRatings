@@ -28,19 +28,19 @@ interface RandomApiService {
     fun randomFromDecade(@Path("decade") decade: Long): Deferred<AlbumObject>
 
     @GET("performers")
-    fun allPerformers(): Deferred<PerformerObject>
+    fun allPerformers(@Query("page") page: Int = 0): Deferred<PerformerObject>
 
     @GET("performers/{performerId}")
     fun performer(@Path("performerId") performerId: Int): Deferred<PerformerProperty>
 
     @GET("performers/query")
-    fun performersQuery(@Query("query") query: String): Deferred<PerformerObject>
+    fun performersQuery(@Query("query") query: String, @Query("page") page: Int = 0): Deferred<PerformerObject>
 
     @GET("albums")
-    fun allAlbums(): Deferred<AlbumObject>
+    fun allAlbums(@Query("page") page: Int = 0): Deferred<AlbumObject>
 
     @GET("albums/query")
-    fun albumsQuery(@Query("query") query: String): Deferred<AlbumObject>
+    fun albumsQuery(@Query("query") query: String, @Query("page") page: Int = 0): Deferred<AlbumObject>
 
     @GET("albums/{albumId}")
     fun album(@Path("albumId") albumId: Int): Deferred<AlbumProperty>
@@ -49,7 +49,7 @@ interface RandomApiService {
     fun performerAlbums(@Query("performerId") performer: Int): Deferred<AlbumObject>
 
     @GET("ratings")
-    fun allRatings(): Deferred<RatingObject>
+    fun allRatings(@Query("page") page: Int = 0): Deferred<RatingObject>
 
     @GET("ratings/user")
     fun userRatings(@Query("user") user: String): Deferred<RatingObject>
