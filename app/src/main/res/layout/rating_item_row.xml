@@ -70,13 +70,6 @@
                     android:text="@{@string/rating_row_rate(rating.rate)}"
                     android:layout_margin="2dp" />
 
-                <Button
-                    android:id="@+id/details_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rating_item_row_details"
-                    android:layout_margin="2dp"/>
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>

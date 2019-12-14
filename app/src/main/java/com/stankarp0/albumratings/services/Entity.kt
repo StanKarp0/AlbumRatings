@@ -54,28 +54,6 @@ data class PerformerObject(
 }
 
 @Keep
-data class PerformerProperty2(
-    val performerId: Int//,
-//    val name: String,
-//    val average: Double,
-//    val ratingsCount: Int,
-//    val albumCount: Int
-): Serializable
-
-data class PerformerEmbedded2(
-    val performers: List<PerformerProperty2>?
-)
-
-data class PerformerObject2(
-    val _embedded: PerformerEmbedded2
-) {
-
-    val performers: List<PerformerProperty2>
-        get() = this._embedded.performers ?: listOf()
-
-}
-
-@Keep
 data class RatingProperty(
     val ratingId: Int,
     val date: String,

@@ -38,17 +38,15 @@ class RatingRecyclerAdapter(
 
 
     class RatingHolder(
-        rating_details: (RatingProperty) -> NavDirections,
+        val rating_details: (RatingProperty) -> NavDirections,
         private var binding: RatingItemRowBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         private var view: View = binding.root
 
-        init {
-            binding.detailsButton.setOnClickListener {
-                binding.rating?.let {
-                    view.findNavController().navigate(rating_details(it))
-                }
+        override fun onClick(v: View) {
+            binding.rating?.let {
+                v.findNavController().navigate(rating_details(it))
             }
         }
 
