@@ -13,7 +13,6 @@ import com.stankarp0.albumratings.ui.adapters.RatingRecyclerAdapter
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: AlbumObject?) {
     val adapter = recyclerView.adapter as AlbumRecyclerAdapter
-    Log.i("bindRecyclerView", data?.albums.toString())
     adapter.submitList(data?.albums)
 }
 
@@ -21,13 +20,11 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: AlbumObject?) {
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: RatingObject?) {
     val adapter = recyclerView.adapter as RatingRecyclerAdapter
-    Log.i("bindRecyclerView", data?.ratings.toString())
     adapter.submitList(data?.ratings)
 }
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: PerformerObject?) {
     val adapter = recyclerView.adapter as PerformerRecyclerAdapter
-    Log.i("bindRecyclerView", data?.performers.toString())
     adapter.submitList(data?.performers)
 }

@@ -1,6 +1,7 @@
 package com.stankarp0.albumratings.ui.performerdetails
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -61,6 +62,14 @@ class PerformerDetailsFragment : Fragment() {
 
         // Fill album list
         viewModel.updateModel(performer)
+
+        binding.searchButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEARCH)
+            intent.setPackage("com.google.android.youtube")
+            intent.putExtra("query", performer.name)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
 
         return binding.root
     }

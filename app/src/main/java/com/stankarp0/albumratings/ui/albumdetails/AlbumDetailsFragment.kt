@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.stankarp0.albumratings.databinding.FragmentAlbumDetailsBinding
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.ui.adapters.RatingRecyclerAdapter
+import android.content.Intent
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -70,6 +73,14 @@ class AlbumDetailsFragment : Fragment() {
             val action = AlbumDetailsFragmentDirections.actionAlbumDetailsFragmentToPerformerDetailsFragment(it)
             binding.root.findNavController().navigate(action)
         })
+
+        binding.searchButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEARCH)
+            intent.setPackage("com.google.android.youtube")
+            intent.putExtra("query", album.header)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
 
         return binding.root
     }
