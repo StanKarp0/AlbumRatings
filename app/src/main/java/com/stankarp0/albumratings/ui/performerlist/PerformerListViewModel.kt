@@ -60,4 +60,10 @@ class PerformerListViewModel : ViewModel() {
         updatePerformers()
     }
 
+    fun reloadPerformers() {
+        page = 0
+        _performerObject.value = null
+        updatePerformers()
+    }
+
 }

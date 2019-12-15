@@ -7,6 +7,7 @@
     tools:context=".ui.performerlist.PerformerListFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.stankarp0.albumratings.ui.performerlist.PerformerListViewModel" />
@@ -16,18 +17,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="0dp"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_text"
-            app:listData="@{viewModel.performerObject}"
-            app:spanCount="2" />
+            app:layout_constraintTop_toBottomOf="@+id/search_text">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:padding="6dp"
+                app:listData="@{viewModel.performerObject}"
+                app:spanCount="2" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <EditText
             android:id="@+id/search_text"

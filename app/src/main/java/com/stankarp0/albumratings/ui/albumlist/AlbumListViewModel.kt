@@ -59,4 +59,10 @@ class AlbumListViewModel : ViewModel() {
         _albumObject.value = null
         updateAlbums()
     }
+
+    fun reloadAlbums() {
+        page = 0
+        _albumObject.value = null
+        updateAlbums()
+    }
 }

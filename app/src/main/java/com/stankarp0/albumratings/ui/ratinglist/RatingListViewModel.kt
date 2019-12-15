@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.stankarp0.albumratings.services.RandomApi
+import com.stankarp0.albumratings.services.RatingEmbedded
 import com.stankarp0.albumratings.services.RatingObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,21 +23,35 @@ class RatingListViewModel : ViewModel() {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var page = 0
 
     init {
         updateRatings()
     }
 
-    private fun updateRatings() {
+    fun updateRatings() {
         coroutineScope.launch {
-            val randomDeferred = RandomApi.retrofitService.allRatings()
+            val randomDeferred = RandomApi.retrofitService.allRatings(page)
+            page += 1
+
             try {
                 val result = randomDeferred.await()
-                _ratingObject.value = result
+                if (_ratingObject.value == null) {
+                    _ratingObject.value = result
+                } else if (result.ratings.isNotEmpty()){
+                    val ratings = (_ratingObject.value?.ratings ?: listOf()) + result.ratings
+                    _ratingObject.value = RatingObject(RatingEmbedded(ratings))
+                }
             } catch (e: Exception) {
                 Log.e("RatingListViewModel","Failure: ${e.message}")
             }
         }
+    }
+
+    fun reloadRatings() {
+        page = 0
+        _ratingObject.value = null
+        updateRatings()
     }
 
     override fun onCleared() {

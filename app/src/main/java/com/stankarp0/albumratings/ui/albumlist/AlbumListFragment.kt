@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.databinding.FragmentAlbumListBinding
@@ -27,6 +28,7 @@ class AlbumListFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: AlbumRecyclerAdapter
     private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var swipeRefresh: SwipeRefreshLayout
     private val viewModel: AlbumListViewModel by lazy {
         ViewModelProviders.of(this).get(AlbumListViewModel::class.java)
     }
@@ -43,6 +45,8 @@ class AlbumListFragment : Fragment() {
             inflater,
             R.layout.fragment_album_list, container, false
         )
+        swipeRefresh = binding.swipeRefresh
+        swipeRefresh.isRefreshing = true
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -63,6 +67,7 @@ class AlbumListFragment : Fragment() {
 
         viewModel.albumObject.observe(this, Observer {
             setRecyclerViewScrollListener()
+            swipeRefresh.isRefreshing = false
         })
 
         binding.searchText.setOnEditorActionListener { v, actionId, event ->
@@ -78,6 +83,11 @@ class AlbumListFragment : Fragment() {
             }
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            recyclerView.removeOnScrollListener(scrollListener)
+            viewModel.reloadAlbums()
+        }
+
         return binding.root
     }
 
@@ -89,6 +99,7 @@ class AlbumListFragment : Fragment() {
                 val totalItemCount = linearLayoutManager.itemCount
                 if (totalItemCount == lastVisibleItemPosition + 1) {
                     recyclerView.removeOnScrollListener(scrollListener)
+                    swipeRefresh.isRefreshing = true
                     viewModel.updateAlbums()
                 }
             }

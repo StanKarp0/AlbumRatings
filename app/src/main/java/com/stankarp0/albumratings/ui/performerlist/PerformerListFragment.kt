@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.stankarp0.albumratings.R
 import com.stankarp0.albumratings.databinding.FragmentPerformerListBinding
 import com.stankarp0.albumratings.ui.adapters.PerformerRecyclerAdapter
@@ -25,6 +26,7 @@ class PerformerListFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: PerformerRecyclerAdapter
     private lateinit var scrollListener: RecyclerView.OnScrollListener
+    private lateinit var swipeRefresh: SwipeRefreshLayout
     private val viewModel: PerformerListViewModel by lazy {
         ViewModelProviders.of(this).get(PerformerListViewModel::class.java)
     }
@@ -41,7 +43,8 @@ class PerformerListFragment : Fragment() {
             inflater,
             R.layout.fragment_performer_list, container, false
         )
-
+        swipeRefresh = binding.swipeRefresh
+        swipeRefresh.isRefreshing = true
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -62,6 +65,7 @@ class PerformerListFragment : Fragment() {
 
         viewModel.performerObject.observe(this, Observer {
             setRecyclerViewScrollListener()
+            binding.swipeRefresh.isRefreshing = false
         })
 
         binding.searchText.setOnEditorActionListener { v, actionId, event ->
@@ -77,6 +81,11 @@ class PerformerListFragment : Fragment() {
             }
         }
 
+        swipeRefresh.setOnRefreshListener {
+            recyclerView.removeOnScrollListener(scrollListener)
+            viewModel.reloadPerformers()
+        }
+
         return binding.root
 
     }
@@ -89,12 +98,12 @@ class PerformerListFragment : Fragment() {
                 val totalItemCount = linearLayoutManager.itemCount
                 if (totalItemCount == lastVisibleItemPosition + 1) {
                     recyclerView.removeOnScrollListener(scrollListener)
+                    swipeRefresh.isRefreshing = true
                     viewModel.updatePerformers()
                 }
             }
         }
         recyclerView.addOnScrollListener(scrollListener)
     }
-
 
 }

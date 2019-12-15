@@ -38,8 +38,7 @@ class PerformerRecyclerAdapter(
     class PerformerHolder(
         private val on_click: (PerformerProperty) -> NavDirections,
         private var binding: PerformerItemRowBinding
-    ) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         private var view: View = binding.root
 

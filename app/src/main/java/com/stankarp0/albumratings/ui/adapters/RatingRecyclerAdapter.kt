@@ -44,6 +44,10 @@ class RatingRecyclerAdapter(
 
         private var view: View = binding.root
 
+        init {
+            view.setOnClickListener(this)
+        }
+
         override fun onClick(v: View) {
             binding.rating?.let {
                 v.findNavController().navigate(rating_details(it))
